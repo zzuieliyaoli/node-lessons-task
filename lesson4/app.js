@@ -1,11 +1,13 @@
-var express = require("express");
+
 var superagent = require("superagent");
 var cheerio = require("cheerio");
 var eventproxy = require("eventproxy");
 var url = require("url");
-var postUrl = "https://cnodejs.org/";
 
-superagent.get(postUrl)  //获取列表
+
+var targetUrl = "https://cnodejs.org/";
+
+superagent.get(targetUrl)  //获取列表
 	.end(function(err, res){
 		if (err) {
 			return console.err(err);
@@ -15,7 +17,7 @@ superagent.get(postUrl)  //获取列表
 
 		$("#topic_list .topic_title").each(function(idx, element){
 			var $element = $(element);
-			var href = url.resolve(postUrl, $element.attr("href"));
+			var href = url.resolve(targetUrl, $element.attr("href"));
 			postUrls.push(href);
 			if (idx == 1) {
 				return false;
